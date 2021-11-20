@@ -6,6 +6,9 @@ Created an Optimized PCA to select features influencing scale color across 8 dif
 ## Aims
 Developed a python program to better understand the relationship between butterfly scale morphology and scale color using scraped data from various scientific publications and independent data collected from samples within the lab. Butterflies exhibit a wide range of color diversity. Such color diversity is housed within small structures called scales that cover the wings of lepidopterans. These scales exhibit a huge diversity of sub-structures known as ‘ultra-structures,’ which are associated with each color phenotype. However, it is not well understood if there are any shared morphological traits across scales of the same color when looking at distantly related Lepidoptera species and moths. As such, The Scale Project aims to understand what these shared morphological traits are.  My approach was to develop a method of feature selection using an optimized principal component analysis (PCA) to reduce the dimensionality of our data and select for a set of sub-features that most heavily influenced scale color in the data. I then used this method to analyze different sub-sets of data to extract meaningful analysis and conclusion.
 
+### Butterfly Ultra Structures
+![alt text](https://github.com/Lukas-Elsrode/Kronforst_Scale_Project/blob/main/img/ref/ultra_structures.png)
+
 ## Applications 
 I examined different families of Lepidoptera to find their most important ultra-structure characteristics.Reducing the dimension of the data for all our datasets of different color classifications. Finally, I examine how these features correspond to a color change for a mutant variant of a butterfly in comparison to their wild relatives. 
 
