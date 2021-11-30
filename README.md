@@ -1,53 +1,116 @@
 # Kronforst-Scale-Project
 
 ## Project Description
-Created an Optimized PCA to select features influencing scale color across 8 different families of butterflies and moths including CRISPR-Cas9 mutant variants.
+Created an Optimized PCA to select features influencing scale color across eight different families of butterflies and moths including CRISPR-Cas9 mutant variants.
 
 ## Aims
-Developed a python program to better understand the relationship between butterfly scale morphology and scale color using scraped data from various scientific publications and independent data collected from samples within the lab. Butterflies exhibit a wide range of color diversity. Such color diversity is housed within small structures called scales that cover the wings of lepidopterans. These scales exhibit a huge diversity of sub-structures known as ‘ultra-structures,’ which are associated with each color phenotype. However, it is not well understood if there are any shared morphological traits across scales of the same color when looking at distantly related Lepidoptera species and moths. As such, The Scale Project aims to understand what these shared morphological traits are.  My approach was to develop a method of feature selection using an optimized principal component analysis (PCA) to reduce the dimensionality of our data and select for a set of sub-features that most heavily influenced scale color in the data. I then used this method to analyze different sub-sets of data to extract meaningful analysis and conclusion.
+Developing a python program to better understand the relationship between butterfly scale morphology and scale color using scraped data from various scientific publications and independent data collected from samples within the lab. 
+
+Butterflies exhibit a wide range of color diversity. Such color diversity is housed within small structures called scales that cover the wings of lepidopterans. These scales exhibit a huge diversity of sub-structures known as ‘ultra-structures,’ which are associated with each color phenotype. However, it is not well understood if there are any shared morphological traits across scales of the same color when looking at distantly related Lepidoptera species and moths. As such, The Scale Project aims to understand what these shared morphological traits are.  
+
+My approach was to develop a method of feature selection using an optimized principal component analysis (PCA) to reduce the dimensionality of our data and select for a set of sub-features that most heavily influenced scale color in the data. I then used this method to analyze different sub-sets of data to extract meaningful analysis and conclusion.
 
 ### Butterfly Ultra Structures
 ![alt text](https://github.com/Lukas-Elsrode/Kronforst_Scale_Project/blob/main/img/ref/ultra_structures.png)
 
+The seven morphological ultra-structure characteristics measured from scientific publication and lab images are visually depicted above. This process was done using 
+the Java based image analysis software ImageJ. 
+
 ## Applications 
-I examined different families of Lepidoptera to find their most important ultra-structure characteristics.Reducing the dimension of the data for all our datasets of different color classifications. Finally, I examine how these features correspond to a color change for a mutant variant of a butterfly in comparison to their wild relatives. 
+Find the 'most important' ultra-structure characteristics influencing the phenotypic expression of scale color in butterflies. 
+
+Reduce the dimension of the data for all our datasets of different color classifications. 
+
+Examine how these features correspond to a color change for a mutant variant of a butterfly in comparison to their wild relatives. 
 
 ## Methods
 
+I used a color picker from an image tool and well-known color algorithm to convert the RGB values of these images into their closest definable color according the the CSS3 library.These RBG values were used to generate four separate data sets with four unique 'color mappings'. 
+
 ### Color Classification - Color Mapping
 
-I developed a way to apply a variety of color classification methods to these scales by using sampled RGB values to re-label the scale color variable. 
-I used a color picker from an image tool and well-known color algorithm to convert the RGB values into their closest definable color according the the CSS3 library. 
-These RBG values were used to generate four separate data sets with four unique 'color mappings'. 
-
-Shown below is how the scales from one dataset are mapped to their respective rbg values using a custom 
-index of species name, genotype, base scale color, and iridescent scale color. 
+Shown below are all the default color classifications according to the original color label for the scales and their respective rbg values, mapped using a custom index of species name, genotype, base scale color, and a +i() to denote an iridescent scale color in addition to the base pigment scale color. 
 
 ```
-{'carystoidesescalantei wt white': 'rgb(255,255,255)',
- 'papilioxuthus wt cream': 'rgb(248,248,255)',
- 'papilioxuthus wt orange': 'rgb(255,165,0)',
- 'papilioxuthus wt black': 'rgb(0,0,0)',
- 'papilioxuthus wt blue': 'rgb(0,0,255)',
- 'papiliopolytes wt white': 'rgb(255,255,255)',
- 'graphiumsarpedon wt white': 'rgb(255,255,255)',
- 'graphiumsarpedon wt glass + i(glass)': 'rgb(0,255,255)',
- 'battusphilenor wt orange': 'rgb(255,165,0)',
- 'battusphilenor wt black + i(blue)': 'rgb(0,0,0)',
- 'papiliomaackii wt black': 'rgb(0,0,0)',
- 'papiliohelenus wt black': 'rgb(0,0,0)',
- 'troidesaeacus wt black': 'rgb(0,0,0)',
- 'trogonopterabrookiana wt white': 'rgb(255,255,255)',
- 'trogonopterabrookiana wt black': 'rgb(0,0,0)'}
+{
+    'bicyclusanynana wt black': 'rgb(6,3,0)', 
+    'bicyclusanynana wt brown': 'rgb(125,98,61)', 
+    'bicyclusanynana wt beige': 'rgb(228,189,115)', 
+    'bicyclusanynana wt white': 'rgb(255,255,255)', 
+    'bicyclusanynana wt gold': 'rgb(249,168,13)', 
+    'bicyclusanynana mutant-yellow brown': 'rgb(97,61,8)', 
+    'bicyclusanynana mutant-ddc grey': 'rgb(130,136,134)', 
+    'bicyclusanynana mutant-ddc yellow': 'rgb(240,225,143)', 
+    'heliconiustelesiphe wt red': 'rgb(200,55,3)',
+    'heliconiussara wt yellow': 'rgb(247,242,159)',
+    'heliconiuscydno wt black': 'rgb(44,46,58)',
+    'heliconiuscydno wt white': 'rgb(249,254,254)',
+    'heliconiuscydno mutant-al1 brown': 'rgb(65,46,57)', 
+    'heliconiuserato wt yellow': 'rgb(209,221,70)',
+    'heliconiuserato wt black': 'rgb(20,20,19)', 
+    'heliconiuserato wt red': 'rgb(148,25,21)', 
+    'hypolimnassalmacis wt brown': 'rgb(71,42,13)',
+    'hypolimnassalmacis wt white': 'rgb(243,230,217)', 
+    'morphopeleides wt black': 'rgb(81,67,55)', 
+    'morphopeleides wt brown': 'rgb(85,71,55)', 
+    'danausgenutia wt yellow': 'rgb(243,210,142)', 
+    'melanitisleda wt orange': 'rgb(140,66,36)', 
+    'melanitisleda wt black': 'rgb(35,30,35)', 
+    'melanitisleda wt white': 'rgb(219,212,194)', 
+    'melanitisleda wt brown': 'rgb(199,172,129)', 
+    'penthemaadelma wt black': 'rgb(2,2,2)', 
+    'papilioxuthus wt cream': 'rgb(230,229,170)', 
+    'papilioxuthus wt orange': 'rgb(199,114,29)', 
+    'papilioxuthus wt black': 'rgb(3,3,5)', 
+    'papilioxuthus wt blue': 'rgb(119,132,135)', 
+    'papiliopolytes wt white': 'rgb(250,250,250)', 
+    'graphiumsarpedon wt white': 'rgb(167,173,157)', 
+    'graphiumsarpedon wt glass + i(glass)': 'rgb(106,135,74)', 
+    'battusphilenor wt orange': 'rgb(159,90,39)', 
+    'battusphilenor wt black + i(blue)': 'rgb(64,139,147)', 
+    'papiliomaackii wt black': 'rgb(34,34,34)', 
+    'trogonopterabrookiana wt white': 'rgb(201,199,194)', 
+    'trogonopterabrookiana wt black': 'rgb(30,35,23)', 
+    'papilionireus wt yellow + i(green)': 'rgb(67,170,171)', 
+    'pachlioptaaristolochiae wt black': 'rgb(29,29,29)', 
+    'pachlioptaaristolochiae wt brown': 'rgb(60,45,30)', 
+    'papiliohelenus wt black': 'rgb(1,1,1)', 
+    'troidesaeacus wt black': 'rgb(24,24,24)', 
+    'catopsiliapomona wt white + i(green)': 'rgb(216,224,171)', 
+    'catopsiliapomona wt yellow + i(green)': 'rgb(190,196,74)', 
+    'pierisrapae wt black': 'rgb(60,55,42)', 
+    'pierisrapae wt white': 'rgb(232,234,231)', 
+    'anthochariscardamines wt orange': 'rgb(253,143,8)', 
+    'deliasnigrina wt white': 'rgb(213,211,179)', 
+    'coliascrocea wt white': 'rgb(202,204,191)', 
+    'coliascrocea wt black': 'rgb(33,24,25)', 
+    'coliascrocea mutant-barh1 orange': 'rgb(242,208,108)', 
+    'coliascrocea mutant-barh1 white': 'rgb(238,231,197)', 
+    'coliascrocea mutant-orange white': 'rgb(180,179,183)', 
+    'c.eurytheme wt orange': 'rgb(244,152,1)', 
+    'c.eurytheme wt white': 'rgb(212,225,209)', 
+    'polyommatusicarus wt brown + i(blue)': 'rgb(127,140,190)', 
+    'polyommatusmarcidus wt brown': 'rgb(124,96,38)', 
+    'theclaopisena wt brown + i(green)': 'rgb(67,137,44)', 
+    'albulinametallica wt gold + i(green)': 'rgb(221,248,182)', 
+    'albulinametallica wt brown + i(blue)': 'rgb(114,129,180)', 
+    'cyanoprysremus wt blue': 'rgb(81,106,138)', 
+    'callophrysrubi wt brown + i(green)': 'rgb(91,187,116)', 
+    'polyommatusdaphnis wt brown + i(blue)': 'rgb(152,160,184)', 
+    'atymna wt red': 'rgb(197,64,15)', 
+    'carystoidesescalantei wt white': 'rgb(217,216,204)', 
+    'bunaeaalcinoe wt brown': 'rgb(51,28,14)', 
+    'eterusiataiwana wt brown + i(green)': 'rgb(72,85,50)', 
+    'chrysiridiarhipheus wt yellow + i(blue)': 'rgb(140,197,175)'
+    }
+
 ```
 
-I then used these mappings of scales to their visible color 
-to generate different color labels for those scales and their 
-representative color on any visualizations. 
 
 #### Raw Data 
 
-The color is labeled as it is in the publication where we took the data from. 
+The color is labeled as it is in the publication where we took the data from. These color definitions 
+correspond to the following RGB values.  
 
 ```
 {'white': 'rgb(255,255,255)',
@@ -63,10 +126,14 @@ The color is labeled as it is in the publication where we took the data from.
  'beige': 'rgb(245,245,220)'}
 ```
 
+Notice how the RGB values present in the sampled data corespond to a much larger and varied set of tuples than in the 
+above definition of the labeled color as defined by CSS3. As such, I needed to develop a way to better define the color of scales 
+by using their RGB values to cluster them together into some definable broad set of colors. 
+
 #### Closest Data 
 
-The color is labeled as the closest color to the reference default color values in color.py
-given the associated RBG value of the scale. 
+In this data-set the color is labeled as the closest color to the reference default color values in color.py
+given the associated RBG value of the scale shown below.
 
 ```
 DEFAULT_COLORS = [
@@ -87,8 +154,8 @@ DEFAULT_COLORS = [
 ]
 ```
 
-Out of the available colors to choose from our color value is re-labeled 
-as shown below in the same original dataset as. 
+Out of the available colors to choose from our color values, the color values found in the full data-set are re-labeled 
+and re-mapped to the colors shown below. 
 
 ```
 {'beige': 'rgb(245,245,220)', 
